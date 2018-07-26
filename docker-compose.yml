@@ -1,7 +1,7 @@
 version: '2'
 services:
-  webhook:
-    image: snow-webhook
+  snow-webhook:
+    build: .
     container_name: snow-webhook
     ports:
       - "5018:5018"
