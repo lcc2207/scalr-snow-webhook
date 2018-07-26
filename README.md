@@ -6,35 +6,242 @@ Note: this works with custom servicenow tables for farm and server records, adju
 
 Table structure
 
-##Table_name:
-#Scalr Servers
+# Table_name:
+## Scalr Servers
 
-id
-environment_id
-account_id
-cloud_platform
-cloud_location
-farm_role_alias
-farm_role_id
-hostname
-public_ip
-private_ip
-instance_type
-farm
-status
+<table>
+  <tr>
+    <th>Column Name</th>
+    <th>Type</th>
+  </tr>
+  <tr>
+    <td>
+    id
+    </td> 
+    <td>
+    string
+    </td> 
+  </tr>
+    <tr>
+    <td>
+    environment_id
+    </td> 
+    <td>
+    string
+    </td> 
+  </tr>
+    <tr>
+    <td>
+    account_id
+    </td> 
+    <td>
+    string
+    </td> 
+  </tr>
+  <tr>
+    <td>
+     cloud_platform
+    </td> 
+    <td>
+     string
+    </td> 
+  </tr>
+  <tr>
+    <td>
+     cloud_location
+    </td> 
+    <td>
+     string
+    </td> 
+  </tr> 
+  <tr>
+    <td>
+     farm_role_alias
+    </td> 
+    <td>
+     string
+    </td> 
+  </tr>
+  <tr>
+    <td>
+     farm_role_id
+    </td> 
+    <td>
+     string
+    </td> 
+  </tr>
+  <tr>
+    <td>
+     farm_role_alias
+    </td> 
+    <td>
+     string
+    </td> 
+  </tr>
+  <tr>
+    <td>
+     hostname
+    </td> 
+    <td>
+     string
+    </td> 
+  </tr>
+  <tr>
+    <td>
+     public_ip
+    </td> 
+    <td>
+     string
+    </td> 
+  </tr>
+  <tr>
+    <td>
+     instance_type
+    </td> 
+    <td>
+     string
+    </td> 
+  </tr>
+  <tr>
+    <td>
+     farm
+    </td> 
+    <td>
+     string
+    </td> 
+  </tr>
+  <tr>
+    <td>
+     status
+    </td> 
+    <td>
+     string
+    </td> 
+  </tr>
+</table>
 
 
-#Scalr Farms
-id
-owner_email
-name
-environment_id
-environment_name
-account_id
-account_name
-cost_center_name
-cost_center_id
-cost_center_billing_code
-project_name
-project_id
-project_billing_code
+## Scalr Farms
+<table>
+  <tr>
+    <th>Column Name</th>
+    <th>Type</th>
+  </tr>
+  <tr>
+    <td>
+    id
+    </td> 
+    <td>
+    string
+    </td> 
+  </tr>
+    <tr>
+    <td>
+    owner_email
+    </td> 
+    <td>
+    string
+    </td> 
+  </tr>
+    <tr>
+    <td>
+    name
+    </td> 
+    <td>
+    string
+    </td> 
+  </tr>
+  <tr>
+    <td>
+     environment_id
+    </td> 
+    <td>
+     string
+    </td> 
+  </tr>
+  <tr>
+    <td>
+     environment_name
+    </td> 
+    <td>
+     string
+    </td> 
+  </tr> 
+  <tr>
+    <td>
+     account_id
+    </td> 
+    <td>
+     string
+    </td> 
+  </tr>
+  <tr>
+    <td>
+     account_name
+    </td> 
+    <td>
+     string
+    </td> 
+  </tr>
+  <tr>
+    <td>
+     cost_center_name
+    </td> 
+    <td>
+     string
+    </td> 
+  </tr>
+  <tr>
+    <td>
+     cost_center_id
+    </td> 
+    <td>
+     string
+    </td> 
+  </tr>
+  <tr>
+    <td>
+     cost_center_billing_code
+    </td> 
+    <td>
+     string
+    </td> 
+  </tr>
+  <tr>
+    <td>
+     project_name
+    </td> 
+    <td>
+     string
+    </td> 
+  </tr>
+  <tr>
+    <td>
+     project_id
+    </td> 
+    <td>
+     string
+    </td> 
+  </tr>
+  <tr>
+    <td>
+     project_billing_code
+    </td> 
+    <td>
+     string
+    </td> 
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
