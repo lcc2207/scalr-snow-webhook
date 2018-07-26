@@ -1,0 +1,7 @@
+version: '2'
+services:
+  webhook:
+    image: webhook
+    container_name: webhook
+    ports:
+      - "5018:5018"
