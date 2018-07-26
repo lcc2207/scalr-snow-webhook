@@ -6,12 +6,12 @@ RUN apt-get update && \
     groupadd uwsgi && \
     useradd -g uwsgi uwsgi
 
-COPY ./requirements.txt /opt/webhook/
+COPY ./requirements.txt /opt/snow-webhook/
 
-RUN pip install -r /opt/webhook/requirements.txt
+RUN pip install -r /opt/snow-webhook/requirements.txt
 
-COPY . /opt/webhook
+COPY . /opt/snow-webhook
 
-EXPOSE 5000
+EXPOSE 5018
 
-CMD ["/usr/bin/uwsgi", "--ini", "/opt/webhook/uwsgi.ini"]
+CMD ["/usr/bin/uwsgi", "--ini", "/opt/snow-webhook/uwsgi.ini"]
