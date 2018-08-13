@@ -114,7 +114,7 @@ def server_object(data, farm_sys_id):
         'u_public_ip': data['SCALR_EXTERNAL_IP'],
         'u_private_ip': data['SCALR_INTERNAL_IP'],
         'u_instance_type': data['SCALR_SERVER_TYPE'],
-        'u_farm': farm_sys_id
+        'u_farm': data['SCALR_FARM_NAME']
     }
 
 
@@ -208,4 +208,3 @@ def validate_request(request):
 
 if __name__ == '__main__':
     app.run(debug=False, host='0.0.0.0')
-
