@@ -2,6 +2,7 @@ version: '2'
 services:
   snow-webhook:
     build: .
+    restart: always
     container_name: snow-webhook
     ports:
       - "5018:5018"
