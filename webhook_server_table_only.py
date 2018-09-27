@@ -29,10 +29,8 @@ SNOW_URL = os.getenv('SNOW_URL', '')
 SNOW_USER = os.getenv('SNOW_USER', '')
 SNOW_PASS = os.getenv('SNOW_PASS', '')
 SCALR_URL = os.getenv('SCALR_URL', '')
-SCALR_API_KEY = os.getenv('SCALR_API_KEY', '')
-SCALR_API_SECRET = os.getenv('SCALR_API_SECRET', '')
 
-for var in ['SCALR_SIGNING_KEY', 'SNOW_URL', 'SNOW_USER', 'SNOW_PASS', 'SCALR_URL', 'SCALR_API_KEY', 'SCALR_API_SECRET']:
+for var in ['SCALR_SIGNING_KEY', 'SNOW_URL', 'SNOW_USER', 'SNOW_PASS', 'SCALR_URL']:
     logging.info('Config: %s = %s', var, globals()[var] if 'PASS' not in var else '*' * len(globals()[var]))
 
 
