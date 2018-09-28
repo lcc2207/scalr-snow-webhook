@@ -29,7 +29,6 @@ SNOW_URL = os.getenv('SNOW_URL', '')
 SNOW_USER = os.getenv('SNOW_USER', '')
 SNOW_PASS = os.getenv('SNOW_PASS', '')
 SCALR_URL = os.getenv('SCALR_URL', '')
-SCALR_TABLE = os.getenv('SCALR_TABLE', 'u_scalr_servers')
 
 for var in ['SCALR_SIGNING_KEY', 'SNOW_URL', 'SNOW_USER', 'SNOW_PASS', 'SCALR_URL']:
     logging.info('Config: %s = %s', var, globals()[var] if 'PASS' not in var else '*' * len(globals()[var]))
@@ -57,7 +56,7 @@ def webhook_listener():
 def update_host(data, event):
     snow_client = requests.Session()
     snow_client.auth = (SNOW_USER, SNOW_PASS)
-    farm_sys_id = data['SCALR_FARM_ID']
+    farm_sys_id = update_farm(snow_client, data)
     update_server(snow_client, data, farm_sys_id, event)
     return 'Ok'
 
@@ -72,6 +71,19 @@ def update_server(client, data, farm_sys_id, event):
     else:
         logging.info('Updating server record in ServiceNow for %s', server_id)
         server = snow_update_server(client, server, data, farm_sys_id, status)
+
+
+def update_farm(client, data):
+    farm_id = data['SCALR_FARM_ID']
+    farm = snow_get_farm_by_id(client, farm_id)
+    if not farm:
+        logging.info('Creating a farm record in ServiceNow for %s', farm_id)
+        farm = snow_create_farm(client, data)
+    else:
+        logging.info('Updating farm record in ServiceNow for %s', farm_id)
+        farm = snow_update_farm(client, farm, data)
+    return farm['sys_id']
+
 
 def status_from_event(event):
     return {
@@ -104,8 +116,26 @@ def server_object(data, farm_sys_id):
     }
 
 
+def farm_object(data):
+    return {
+        'u_id': data['SCALR_FARM_ID'],
+        'u_owner_email': data['SCALR_FARM_OWNER_EMAIL'],
+        'u_name': data['SCALR_FARM_NAME'],
+        'u_environment_id': data['SCALR_ENV_ID'],
+        'u_environment_name': data['SCALR_ENV_NAME'],
+        'u_account_id': data['SCALR_ACCOUNT_ID'],
+        'u_account_name': data['SCALR_ACCOUNT_NAME'],
+        'u_cost_center_name': data['SCALR_COST_CENTER_NAME'],
+        'u_cost_center_id': data['SCALR_COST_CENTER_ID'],
+        'u_cost_center_billing_code': data['SCALR_COST_CENTER_BC'],
+        'u_project_name': data['SCALR_PROJECT_NAME'],
+        'u_project_id': data['SCALR_PROJECT_ID'],
+        'u_project_billing_code': data['SCALR_PROJECT_BC'],
+    }
+
+
 def snow_get_server_by_id(client, server_id):
-    r = client.get(SNOW_URL + 'api/now/table/' + SCALR_TABLE + '?u_id={}'.format(server_id))
+    r = client.get(SNOW_URL + 'api/now/table/u_scalr_servers?u_id={}'.format(server_id))
     response = r.json()['result']
     if len(response) == 0:
         return None
@@ -118,7 +148,7 @@ def snow_create_server(client, data, farm_sys_id, status):
     body = server_object(data, farm_sys_id)
     body['u_status'] = status
 
-    r = client.post(SNOW_URL + 'api/now/table/' + SCALR_TABLE, json=body)
+    r = client.post(SNOW_URL + 'api/now/table/u_scalr_servers', json=body)
     return r.json()['result']
 
 
@@ -131,8 +161,32 @@ def snow_update_server(client, server, data, farm_sys_id, status):
     if status:
         body['u_status'] = status
 
-    r = client.patch(SNOW_URL + 'api/now/table/' + SCALR_TABLE + '/{}'.format(server['sys_id']), json=body)
+    r = client.patch(SNOW_URL + 'api/now/table/u_scalr_servers/{}'.format(server['sys_id']), json=body)
     return r.json()['result']
+
+
+def snow_get_farm_by_id(client, farm_id):
+    r = client.get(SNOW_URL + 'api/now/table/u_scalr_farms?u_id={}'.format(farm_id))
+    response = r.json()['result']
+    if len(response) == 0:
+        return None
+    if len(response) > 1:
+        logging.warning('Warning: several farm records found in ServiceNow with id %s', farm_id)
+    return response[0]
+
+
+def snow_create_farm(client, data):
+    body = farm_object(data)
+    r = client.post(SNOW_URL + 'api/now/table/u_scalr_farms', json=body)
+    return r.json()['result']
+
+
+def snow_update_farm(client, farm, data):
+    body = farm_object(data)
+    del body['u_id']
+    r = client.patch(SNOW_URL + 'api/now/table/u_scalr_farms/{}'.format(farm['sys_id']), json=body)
+    return r.json()['result']
+
 
 def validate_request(request):
     if 'X-Signature' not in request.headers or 'Date' not in request.headers:

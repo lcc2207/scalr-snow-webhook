@@ -17,111 +17,111 @@ Note: this works with custom servicenow tables for farm and server records, adju
   <tr>
     <td>
     id
-    </td> 
+    </td>
     <td>
     string
-    </td> 
+    </td>
   </tr>
     <tr>
     <td>
     environment_id
-    </td> 
+    </td>
     <td>
     string
-    </td> 
+    </td>
   </tr>
     <tr>
     <td>
     account_id
-    </td> 
+    </td>
     <td>
     string
-    </td> 
+    </td>
   </tr>
   <tr>
     <td>
      cloud_platform
-    </td> 
+    </td>
     <td>
      string
-    </td> 
+    </td>
   </tr>
   <tr>
     <td>
      cloud_location
-    </td> 
+    </td>
     <td>
      string
-    </td> 
-  </tr> 
+    </td>
+  </tr>
   <tr>
     <td>
      farm_role_alias
-    </td> 
+    </td>
     <td>
      string
-    </td> 
+    </td>
   </tr>
   <tr>
     <td>
      farm_role_id
-    </td> 
+    </td>
     <td>
      string
-    </td> 
+    </td>
   </tr>
   <tr>
     <td>
      farm_role_alias
-    </td> 
+    </td>
     <td>
      string
-    </td> 
+    </td>
   </tr>
   <tr>
     <td>
      hostname
-    </td> 
+    </td>
     <td>
      string
-    </td> 
+    </td>
   </tr>
   <tr>
     <td>
      public_ip
-    </td> 
+    </td>
     <td>
      string
-    </td> 
+    </td>
   </tr>
   <tr>
     <td>
      instance_type
-    </td> 
+    </td>
     <td>
      string
-    </td> 
+    </td>
   </tr>
   <tr>
     <td>
      farm
-    </td> 
+    </td>
     <td>
      string
-    </td> 
+    </td>
   </tr>
   <tr>
     <td>
      status
-    </td> 
+    </td>
     <td>
      string
-    </td> 
+    </td>
   </tr>
 </table>
 
 
-## Scalr Farms
+## Scalr Farms  ** only required if you use the 'webhook_server_farm_tables.py'
 <table>
   <tr>
     <th>Column Name</th>
@@ -130,106 +130,106 @@ Note: this works with custom servicenow tables for farm and server records, adju
   <tr>
     <td>
     id
-    </td> 
+    </td>
     <td>
     string
-    </td> 
+    </td>
   </tr>
     <tr>
     <td>
     owner_email
-    </td> 
+    </td>
     <td>
     string
-    </td> 
+    </td>
   </tr>
     <tr>
     <td>
     name
-    </td> 
+    </td>
     <td>
     string
-    </td> 
+    </td>
   </tr>
   <tr>
     <td>
      environment_id
-    </td> 
+    </td>
     <td>
      string
-    </td> 
+    </td>
   </tr>
   <tr>
     <td>
      environment_name
-    </td> 
+    </td>
     <td>
      string
-    </td> 
-  </tr> 
+    </td>
+  </tr>
   <tr>
     <td>
      account_id
-    </td> 
+    </td>
     <td>
      string
-    </td> 
+    </td>
   </tr>
   <tr>
     <td>
      account_name
-    </td> 
+    </td>
     <td>
      string
-    </td> 
+    </td>
   </tr>
   <tr>
     <td>
      cost_center_name
-    </td> 
+    </td>
     <td>
      string
-    </td> 
+    </td>
   </tr>
   <tr>
     <td>
      cost_center_id
-    </td> 
+    </td>
     <td>
      string
-    </td> 
+    </td>
   </tr>
   <tr>
     <td>
      cost_center_billing_code
-    </td> 
+    </td>
     <td>
      string
-    </td> 
+    </td>
   </tr>
   <tr>
     <td>
      project_name
-    </td> 
+    </td>
     <td>
      string
-    </td> 
+    </td>
   </tr>
   <tr>
     <td>
      project_id
-    </td> 
+    </td>
     <td>
      string
-    </td> 
+    </td>
   </tr>
   <tr>
     <td>
      project_billing_code
-    </td> 
+    </td>
     <td>
      string
-    </td> 
+    </td>
   </tr>
 </table>
 
@@ -237,7 +237,7 @@ Note: this works with custom servicenow tables for farm and server records, adju
 
 
 
-# Instance setup. 
+# Instance setup.
 Execute "bootstrap.sh" on the target install
 
 This will install docker and pull down the SNOW webhook repo.
@@ -262,8 +262,3 @@ env = SCALR_URL=https://demo.scalr.com
 
 # Launch
 execute 'relaunch.sh'
-
-
-
-
-
