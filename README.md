@@ -258,6 +258,7 @@ env = SNOW_URL=https://xxx.service-now.com/
 env = SNOW_USER=admin
 env = SNOW_PASS=password
 env = SCALR_URL=https://demo.scalr.com
+env = SCALR_TABLE=u_scalr_servers
 ```
 
 # Launch
