@@ -65,6 +65,12 @@ def update_host(data, event):
 def update_server(client, data, farm_sys_id, event):
     server_id = data['SCALR_SERVER_ID']
     status = status_from_event(event)
+
+    if event == "HostDown":
+        suspended = data['SCALR_IS_SUSPEND']
+        if suspended == "1":
+            status = "suspended"
+
     server = snow_get_server_by_id(client, server_id)
     if not server:
         logging.info('Creating a server record in ServiceNow for %s', server_id)
